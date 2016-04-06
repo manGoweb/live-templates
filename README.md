@@ -7,3 +7,10 @@ In case you have a lot of template files and `mango dev` slows you down, use thi
 3. run `live-templates [dist_folder] [templates_folder]` for ex. `live-templates dist src/templates`
 4. navigate to `http://localhost:3333`
 5. Enjoy!
+
+
+## Installation
+
+1. `git clone git@github.com:manGoweb/live-templates.git`
+2. `cd live-templates`
+3. `npm link`
