@@ -1,7 +1,10 @@
+#!/usr/bin/env node
+
 var express = require('express')
 var jade = require('jade')
 var fs = require('fs')
 var path = require('path')
+var getConfig = require('./helpers/mango-config')
 
 // $ node index.js ROOT_DIR VIEWS_DIR
 try {
@@ -12,6 +15,7 @@ try {
 	return console.log('Usage: live-templates [root_dir] [views_dir]')
 }
 
+var config = getConfig(process.cwd())
 var app = express()
 app.set('view engine', 'jade')
 app.set('views', viewsDir)
