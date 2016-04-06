@@ -1,21 +1,27 @@
 #!/usr/bin/env node
 
-var express = require('express')
-var jade = require('jade')
 var fs = require('fs')
 var path = require('path')
+var express = require('express')
+var jade = require('jade')
+
 var getConfig = require('./helpers/mango-config')
+var Data = require('./helpers/data')
 
 // $ node index.js ROOT_DIR VIEWS_DIR
 try {
 	var rootDir = path.resolve(process.cwd(), process.argv[2])
-	var viewsDir = path.resolve(rootDir, process.argv[3])
+	var viewsDir = path.resolve(process.cwd(), process.argv[3])
 
 } catch(e){
 	return console.log('Usage: live-templates [root_dir] [views_dir]')
 }
 
+// Setup env
 var config = getConfig(process.cwd())
+var templatesData = new Data(process.cwd(), config)
+
+// Setup server
 var app = express()
 app.set('view engine', 'jade')
 app.set('views', viewsDir)
@@ -35,11 +41,9 @@ app.use(function(req, res, next) {
 	fs.access(filepath, fs.R_OK, err => {
 		if(err) return next()
 
-		try {
-			res.render(filepath)
-		} catch(e) {
-			console.error(e)
-		}
+		var locals = templatesData.get(filename)
+
+		res.render(filepath, locals)
 
 	})
 

@@ -7,12 +7,14 @@
     "run": "node index.js"
   },
   "bin": {
-  	"live-templates": "./index.js"
+    "live-templates": "./index.js"
   },
   "author": "Matěj Šimek <email@matejsimek.cz> (www.matejsimek.cz)",
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.4",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "jsonfile": "^2.2.3",
+    "lodash.assign": "^4.0.7"
   }
 }
